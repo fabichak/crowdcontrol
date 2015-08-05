@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   def list
-  	@posts = Post.root
+  	@posts = Post.all
   end
 
   def detail
-  	@post = Post.find(params[:id])
+  	@posts = Post.where(parent_id: params[:id])
   end
 end
