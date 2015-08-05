@@ -1,11 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  text: MyText
+  text: Text 1
   likes: 1
-  parent_id: 1
+  parent_id: 0
 
 two:
-  text: MyText
-  likes: 1
+  text: Text 2
+  likes: 2
+  parent_id: 0
+
+three:
+  text: Text 3
+  likes: 3
   parent_id: 1

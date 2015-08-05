@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '/posts/list', to: 'posts#list'
+
+  get '/posts/:id', to: 'posts#detail'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
