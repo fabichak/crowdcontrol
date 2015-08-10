@@ -1,0 +1,40 @@
+<html>
+<header>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		console.log("ok");
+
+		$( "#target" ).submit(function( event ) {
+			//var userId = $('.btn-success').attr("data-user-id");
+			//var userToken = $('.btn-success').attr("data-user-token");
+			//var todoBody = $('#todo_body').val();
+			var data = {"email": "mfabichak@gmail.com", "password":"12345678"};
+
+			$.ajax({
+				type : "POST",
+				url : "http://localhost:3000/users/sign_in.json",
+				timeout : 10000,
+				data: JSON.stringify(data),
+				crossDomain : true,
+				datatype : 'json',
+				contentType: "application/json; charset=utf-8",
+				success : function(d) {
+				  console.log(d);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+	});
+	</script>
+</header>
+<body>
+	<form id="target" action="javascript:return false;">
+	  <input type="text" value="Hello there">
+	  <input type="submit" value="Go">
+	</form>
+
+</body>
+</html>

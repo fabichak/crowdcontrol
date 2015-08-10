@@ -27,6 +27,9 @@ gem 'devise', '~> 3.5.1'
 
 gem 'activeadmin', '~> 1.0.0.pre1'
 
+gem 'simple_token_authentication', '~> 1.0'
+
+gem 'rack-cors', :require => 'rack/cors'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
