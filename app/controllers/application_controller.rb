@@ -4,4 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   acts_as_token_authentication_handler_for User
+
+  def set_access_control_headers 
+		headers['Access-Control-Allow-Origin'] = '*'
+		headers['Access-Control-Request-Method'] = '*' 
+	end
 end

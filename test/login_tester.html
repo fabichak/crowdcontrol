@@ -4,6 +4,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		console.log("ok");
+		var token = "";
 
 		$( "#target" ).submit(function( event ) {
 			//var userId = $('.btn-success').attr("data-user-id");
@@ -19,6 +20,31 @@
 				crossDomain : true,
 				datatype : 'json',
 				contentType: "application/json; charset=utf-8",
+				Accept: "application/json",
+				success : function(d) {
+				  console.log(d);
+				  token = d.auth_token;
+				  console.log("token: ", token);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
+		$( "#list" ).submit(function( event ) {
+			//var userId = $('.btn-success').attr("data-user-id");
+			//var userToken = $('.btn-success').attr("data-user-token");
+			//var todoBody = $('#todo_body').val();
+			var data = {"email": "mfabichak@gmail.com", "password":"12345678"};
+
+			$.ajax({
+				type : "GET",
+				url : "http://localhost:3000/posts/list.json",
+				timeout : 10000,
+				datatype : 'json',
+				contentType: "application/json; charset=utf-8",
+				Accept: "application/json",
 				success : function(d) {
 				  console.log(d);
 				},
@@ -27,13 +53,51 @@
 				}
 			});
 		});
+
+		$( "#new_post" ).submit(function( event ) {
+			//var userId = $('.btn-success').attr("data-user-id");
+			//var userToken = $('.btn-success').attr("data-user-token");
+			//var todoBody = $('#todo_body').val();
+			var data = {"email": "mfabichak@gmail.com", "password":"12345678"};
+
+			$.ajax({
+				type : "GET",
+				url : "http://localhost:3000/new_post.json",
+				timeout : 10000,
+				datatype : 'json',
+				contentType: "application/json; charset=utf-8",
+				Accept: "application/json",
+				beforeSend: function (request)
+	            {
+	            	if(token != "")
+	            	{
+		                request.setRequestHeader("X-User-Email", "mfabichak@gmail.com"); 
+		                request.setRequestHeader("X-User-Token", token);
+		            }
+	            },
+				success : function(d) {
+				  console.log(d);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+
 	});
 	</script>
 </header>
 <body>
 	<form id="target" action="javascript:return false;">
-	  <input type="text" value="Hello there">
-	  <input type="submit" value="Go">
+	  <input type="submit" value="Login">
+	</form>
+
+	<form id="list" action="javascript:return false;">
+	  <input type="submit" value="List">
+	</form>
+
+	<form id="new_post" action="javascript:return false;">
+	  <input type="submit" value="New Post">
 	</form>
 
 </body>

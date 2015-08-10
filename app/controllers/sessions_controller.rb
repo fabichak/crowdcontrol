@@ -12,7 +12,7 @@ class SessionsController < Devise::SessionsController
     resource = User.find_for_database_authentication(:email => email)
     return invalid_login_attempt unless resource
 
-    if resource.valid_password?(password)
+    if resource.valid_password?(password) 
       sign_in(:user, resource)
       respond_to do |format|
           format.html {redirect_to admin_root_path}
@@ -44,10 +44,10 @@ class SessionsController < Devise::SessionsController
 
   def invalid_login_attempt
     respond_to do |format|
-      format.html {
-        flash[:alert] = "Erro de autenticação"
-        redirect_to new_user_session_path
-      }
+      # format.html {
+      #   flash[:alert] = "Erro de autenticação"
+      #   redirect_to new_user_session_path
+      # }
       format.json { render :json=> {:success=>false, :message=>"Erro de autenticação"}, :status=>401 }
     end
   end
