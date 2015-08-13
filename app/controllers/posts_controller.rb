@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 	def new_post
 		post = Post.new
 		post.text = params[:text]
+		post.image = params[:image]
 		post.likes = 0
 		post.user = current_user
 

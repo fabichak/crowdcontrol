@@ -1,6 +1,7 @@
 <html>
 <header>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>	
+	<script src="jquery.form.js"></script>	
 	<script type="text/javascript">
 	$(document).ready(function(){
 		console.log("ok");
@@ -54,36 +55,48 @@
 			});
 		});
 
-		$( "#new_post" ).submit(function( event ) {
-			//var userId = $('.btn-success').attr("data-user-id");
-			//var userToken = $('.btn-success').attr("data-user-token");
-			//var todoBody = $('#todo_body').val();
-			var sendInfo = {"text": $('#text_body').val()};
+		// $( "#new_post" ).submit(function( event ) {
+		// 	//var userId = $('.btn-success').attr("data-user-id");
+		// 	//var userToken = $('.btn-success').attr("data-user-token");
+		// 	//var todoBody = $('#todo_body').val();
+		// 	event.preventDefault();
+  //       	var formData = new FormData(this);
+		// 	//var sendInfo = {"text": $('#text_body').val()};
 
-			$.ajax({
-				type : "POST",
-				url : "http://localhost:3000/new_post.json",
-				timeout : 10000,
-				datatype : 'json',
-				data : JSON.stringify(sendInfo),
-				contentType: "application/json; charset=utf-8",
-				Accept: "application/json",
-				beforeSend: function (request)
-	            {
-	            	if(token != "")
-	            	{
-		                request.setRequestHeader("X-User-Email", "mfabichak@gmail.com"); 
-		                request.setRequestHeader("X-User-Token", token);
-		            }
-	            },
-				success : function(d) {
-				  console.log(d);
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
-		});
+		// 	$.ajax({
+		// 		type : "POST",
+		// 		url : "http://localhost:3000/new_post.json",
+		// 		timeout : 10000,
+		// 		datatype : 'json',
+		// 		data : formData,
+		// 		//data : JSON.stringify(sendInfo),
+		// 		//contentType: "application/json; charset=utf-8",
+		// 		//Accept: "application/json",
+		// 		contentType: false,
+  //           	processData: false,
+		// 		beforeSend: function (request)
+	 //            {
+	 //            	if(token != "")
+	 //            	{
+		//                 request.setRequestHeader("X-User-Email", "mfabichak@gmail.com"); 
+		//                 request.setRequestHeader("X-User-Token", token);
+		//             }
+	 //            },
+		// 		success : function(d) {
+		// 		  console.log(d);
+		// 		},
+		// 		error : function(error) {
+		// 			console.log(error);
+		// 		}
+		// 	});
+		// });
+
+		
+		$('#my-form').submit(function() { 
+			var options = { headers: {"X-User-Email" : "mfabichak@gmail.com", "X-User-Token" : token} }; 
+	        $(this).ajaxSubmit(options); 
+	        return false; 
+	    });
 
 	});
 	</script>
@@ -97,10 +110,23 @@
 	  <input type="submit" value="List">
 	</form>
 
-	<form id="new_post" action="javascript:return false;">
+	<!-- <form id="new_post" action="javascript:return false;" enctype="multipart/form-data">
 	  <input type="text" value="default text" id="text_body">
+	  <input name="image" type="file" />
 	  <input type="submit" value="New Post">
-	</form>
+	</form> -->
+	<div id="container">
+		<form action="http://localhost:3000/new_post.json" method="post" id="my-form" enctype="multipart/form-data">
+			<p>Text<br />
+			<input type="text" name="text" id="text" /></p>
+			<p>Image<br />
+			<input type="file" name="image" id="image" /></p>
+			<p><input type="submit" value="Submit" /></p>
+		</form>
+		<div id="output"></div> 
+
+	</div>
+
 
 </body>
 </html>

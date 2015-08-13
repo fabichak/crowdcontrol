@@ -24,6 +24,7 @@ ActiveAdmin.register Post do
     column :id
     column :text
     column :likes
+    column :image
     column :parent_id, sortable: 'post.id'
     column :user, sortable: 'user.email'
     actions
