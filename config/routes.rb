@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get '/posts/:id', to: 'posts#detail'
   
-  get '/new_post', to: 'posts#new_post'
+  post '/new_post', to: 'posts#new_post'
 
   #root to: "posts#list"
 

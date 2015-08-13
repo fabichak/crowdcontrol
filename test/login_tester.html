@@ -58,13 +58,14 @@
 			//var userId = $('.btn-success').attr("data-user-id");
 			//var userToken = $('.btn-success').attr("data-user-token");
 			//var todoBody = $('#todo_body').val();
-			var data = {"email": "mfabichak@gmail.com", "password":"12345678"};
+			var sendInfo = {"text": $('#text_body').val()};
 
 			$.ajax({
-				type : "GET",
+				type : "POST",
 				url : "http://localhost:3000/new_post.json",
 				timeout : 10000,
 				datatype : 'json',
+				data : JSON.stringify(sendInfo),
 				contentType: "application/json; charset=utf-8",
 				Accept: "application/json",
 				beforeSend: function (request)
@@ -97,6 +98,7 @@
 	</form>
 
 	<form id="new_post" action="javascript:return false;">
+	  <input type="text" value="default text" id="text_body">
 	  <input type="submit" value="New Post">
 	</form>
 

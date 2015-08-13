@@ -12,8 +12,18 @@ class PostsController < ApplicationController
 	end
 
 	def new_post
+		post = Post.new
+		post.text = params[:text]
+		post.likes = 0
+		post.user = current_user
+
+		success = false
+		if (post.save!)
+			success = true
+		end	
+
 		respond_to do |format|
-			format.json { render :json=> {:success=>true} }
+			format.json { render :json=> {:success=>success} }
 		end
 	end
 
